@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omar Aly</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #1a1814;
+      --muted:  #6b6560;
+      --faint:  #e8e4df;
+      --warm:   #f5f1ec;
+      --accent: #c0560e;
+      --bg:     #faf8f5;
+      --serif:  'Lora', Georgia, serif;
+      --sans:   'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* Layout */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(250,248,245,0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--faint);
+    }
+    nav .page {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    nav .logo {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.8rem;
+    }
+    nav a {
+      font-size: 0.79rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--ink); }
+
+    /* Hero cover photo */
+    .hero-cover {
+      margin-bottom: 2.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .hero-cover-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Hero */
+    header { padding: 6rem 0 4.5rem; }
+
+    .hero-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 2.5rem;
+    }
+
+    .hero-photo {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--faint);
+      margin-top: 0.5rem;
+    }
+
+    .hero-text { flex: 1; }
+
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    h1 em {
+      font-style: italic;
+      font-weight: 400;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.75;
+    }
+    .hero-sub strong {
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--faint);
+      margin: 3.5rem 0;
+    }
+
+    /* Sections */
+    section { padding: 3rem 0; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.75rem;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    p { margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* About */
+    .about-body {
+      color: #3a3733;
+      font-size: 1rem;
+    }
+
+    /* Experience */
+    .exp-list { list-style: none; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.2rem 1.5rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--faint);
+    }
+    .exp-item:first-child { border-top: 1px solid var(--faint); }
+
+    .exp-role {
+      font-family: var(--serif);
+      font-size: 1.02rem;
+      font-weight: 600;
+      grid-column: 1;
+    }
+    .exp-company {
+      font-size: 0.88rem;
+      color: var(--muted);
+      grid-column: 1;
+    }
+    .exp-desc {
+      font-size: 0.9rem;
+      color: #4a4742;
+      grid-column: 1;
+      margin-top: 0.45rem;
+    }
+    .exp-date {
+      font-size: 0.76rem;
+      color: var(--muted);
+      grid-column: 2;
+      grid-row: 1;
+      text-align: right;
+      white-space: nowrap;
+      padding-top: 0.2rem;
+    }
+    .exp-current .exp-role { color: var(--accent); }
+
+    /* Electrolux group */
+    .exp-group {
+      border-top: 1px solid var(--faint);
+      border-bottom: 1px solid var(--faint);
+      padding: 1.8rem 0 0.5rem;
+      margin-bottom: 0;
+    }
+    .exp-group-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+    .exp-group-company {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .exp-group-tenure {
+      font-size: 0.76rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .exp-group-roles {
+      list-style: none;
+      border-left: 2px solid var(--faint);
+      margin-left: 0.25rem;
+      padding-left: 1.25rem;
+      margin-bottom: 1.2rem;
+    }
+    .exp-group-role-item {
+      padding: 0.65rem 0;
+      border-bottom: 1px dashed var(--faint);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.15rem 1rem;
+    }
+    .exp-group-role-item:last-child { border-bottom: none; }
+    .exp-group-role {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--ink);
+      grid-column: 1;
+    }
+    .exp-group-desc {
+      font-size: 0.86rem;
+      color: #4a4742;
+      grid-column: 1;
+      margin-top: 0.2rem;
+    }
+    .exp-group-date {
+      font-size: 0.74rem;
+      color: var(--muted);
+      grid-column: 2;
+      grid-row: 1;
+      text-align: right;
+      white-space: nowrap;
+      padding-top: 0.15rem;
+    }
+
+    /* Life / Interests with photo slots */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+    .interest-card {
+      background: var(--warm);
+      border: 1px solid var(--faint);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .interest-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .interest-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--faint);
+      color: #b5b0ab;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .interest-body {
+      padding: 1rem;
+    }
+    .interest-body h3 {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .interest-body p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Blog */
+    .blog-empty {
+      border: 1px dashed var(--faint);
+      border-radius: 6px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .blog-empty-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .blog-empty p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Blog post template (hidden until content added) */
+    .blog-list { list-style: none; }
+    .blog-item {
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--faint);
+    }
+    .blog-item:first-child { border-top: 1px solid var(--faint); }
+    .blog-item-date {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+    .blog-item-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .blog-item-title a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .blog-item-title a:hover { color: var(--accent); }
+    .blog-item-excerpt {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 0 2.5rem;
+      border-top: 1px solid var(--faint);
+    }
+    .contact-line {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .footer-meta {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .footer-ai-note {
+      font-size: 0.72rem;
+      color: #b0ada9;
+      font-style: italic;
+    }
+
+    @media (max-width: 580px) {
+      nav ul { gap: 1rem; }
+      nav a { font-size: 0.72rem; letter-spacing: 0.05em; }
+      .hero-inner { flex-direction: column; gap: 1.5rem; }
+      .hero-photo { width: 80px; height: 80px; }
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-date { grid-column: 1; grid-row: auto; text-align: left; margin-top: 0.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="page">
+    <a class="logo" href="#">Omar Aly</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Work</a></li>
+      <li><a href="#life">Life</a></li>
+      <li><a href="#blog">Writing</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header>
+    <!--
+      COVER PHOTO: To add a full-width banner above the hero, uncomment the block below
+      and replace "your-cover-photo.jpg" with your image path.
+
+    <div class="hero-cover">
+      <img src="your-cover-photo.jpg" alt="Cover" class="hero-cover-img" />
+    </div>
+    -->
+    <div class="hero-inner">
+      <!--
+        PROFILE PHOTO: currently pulling from LinkedIn.
+        To use your own photo, replace the src below with a local path, e.g. src="photo.jpg"
+      -->
+      <img
+        class="hero-photo"
+        src="images/headshot.jpg"
+        alt="Omar Aly"
+      />
+      <div class="hero-text">
+        <p class="hero-label">Stockholm, Sweden &middot; originally Giza, Egypt</p>
+        <h1>Engineer, <em>storyteller,</em><br>perpetual learner.</h1>
+        <p class="hero-sub">
+          I help teams solve the challenges that matter most to them.
+          Currently at <strong>Datadog</strong> as an Enterprise Sales Engineer,
+          working with organisations across the Nordics on observability and security.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <hr class="divider" />
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <h2>Like you, a life in progress</h2>
+    <div class="about-body">
+      <p>
+        I grew up in Giza and studied Computer Science and Engineering at the German University
+        in Cairo, graduating in 2014. This gave me a technical foundation that I didn't fully appreciate at the time.
+      </p>
+      <p>
+        While studying, I got involved with AIESEC and spent a good chunk of my early twenties facilitating exchange programmes
+        and travelling across the world. That period genuinely changed how I see the world. One of those exchanges brought me to Stockholm
+        for an internship, and somehow, ten years later, I'm still here. I have a family, a
+        mortgage, and a favourite fika spot. I'm grateful to be able to call Stockholm home.
+      </p>
+      <p>
+        Professionally, I've moved between engineering, product, and sales roles across industries.
+        The thread running through all of it is the same: I like being in the room where technical
+        complexity meets human decisions, and helping the two sides understand each other.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Work Experience</p>
+    <h2>Where I've been</h2>
+
+    <ul class="exp-list">
+
+      <li class="exp-item exp-current">
+        <span class="exp-role">Enterprise Sales Engineer</span>
+        <span class="exp-date">Mar 2026 &ndash; Present</span>
+        <span class="exp-company">Datadog &middot; Stockholm (Hybrid)</span>
+        <p class="exp-desc">
+          Supporting enterprise sales cycles across the Nordics for Datadog's cloud monitoring
+          and observability platform. Technical advisor bridging product capability and
+          customers' observability and security needs.
+        </p>
+      </li>
+
+      <li class="exp-item">
+        <span class="exp-role">Sales Engineer, Nordics</span>
+        <span class="exp-date">Aug 2024 &ndash; Mar 2026</span>
+        <span class="exp-company">Ingrid &middot; Stockholm (Hybrid)</span>
+        <p class="exp-desc">
+          First dedicated SE for the Nordic region at a delivery experience SaaS company.
+          Owned the full technical sales cycle from discovery through evaluations to close.
+        </p>
+      </li>
+
+      <li class="exp-item">
+        <span class="exp-role">Sr. Enterprise Sales Engineer, EMEA</span>
+        <span class="exp-date">Jan 2022 &ndash; Aug 2024</span>
+        <span class="exp-company">Detectify &middot; Stockholm (Hybrid)</span>
+        <p class="exp-desc">
+          Technical single point of contact for enterprise deals across EMEA in web application
+          security and external attack surface management. Advised stakeholders from CISOs to
+          security engineers. Built automation scripts in Go and Python for internal workflows
+          and customer demos.
+        </p>
+      </li>
+
+    </ul>
+
+    <!-- ELECTROLUX GROUP -->
+    <div class="exp-group">
+      <div class="exp-group-header">
+        <span class="exp-group-company">Electrolux &middot; Stockholm</span>
+        <span class="exp-group-tenure">Jan 2016 &ndash; Dec 2021 &middot; 6 yrs</span>
+      </div>
+      <ul class="exp-group-roles">
+
+        <li class="exp-group-role-item">
+          <span class="exp-group-role">Marketing Solutions Manager</span>
+          <span class="exp-group-date">Feb 2021 &ndash; Dec 2021</span>
+          <p class="exp-group-desc">
+            Led the IT marketing solutions team across Electrolux Europe, managing
+            external development vendors and driving budget and ideation for multiple
+            digital initiatives.
+          </p>
+        </li>
+
+        <li class="exp-group-role-item">
+          <span class="exp-group-role">E-Commerce Solution Lead</span>
+          <span class="exp-group-date">Jan 2019 &ndash; Feb 2021</span>
+          <p class="exp-group-desc">
+            Solution lead for Electrolux's direct-to-consumer e-commerce webshop across
+            European markets. Owned key product decisions and stakeholder alignment across
+            a complex landscape of business units and software services.
+          </p>
+        </li>
+
+        <li class="exp-group-role-item">
+          <span class="exp-group-role">Project Manager, Digital Transformation</span>
+          <span class="exp-group-date">Jan 2017 &ndash; Dec 2018</span>
+          <p class="exp-group-desc">
+            Stream lead for marketing and e-commerce within an enterprise-scale digital
+            transformation programme. Coordinated business analysis, development, testing
+            and deployment across distributed teams.
+          </p>
+        </li>
+
+        <li class="exp-group-role-item">
+          <span class="exp-group-role">Product Owner, Group Marketing Solutions</span>
+          <span class="exp-group-date">Jan 2016 &ndash; Dec 2016</span>
+          <p class="exp-group-desc">
+            Defined and prioritised the feature backlog for an internal asset management
+            and PIM web application within an agile scrum team.
+          </p>
+        </li>
+
+      </ul>
+    </div>
+
+    <ul class="exp-list">
+
+      <li class="exp-item" style="border-top: none;">
+        <span class="exp-role">Account Executive</span>
+        <span class="exp-date">Sep 2014 &ndash; Dec 2015</span>
+        <span class="exp-company">Saatchi &amp; Saatchi &middot; Cairo, Egypt</span>
+        <p class="exp-desc">
+          Managed key client relationships for integrated ATL/BTL marketing and advertising
+          campaigns, handling day-to-day strategy and operations.
+        </p>
+      </li>
+
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- LIFE / INTERESTS -->
+  <section id="life">
+    <p class="section-label">Life outside work</p>
+    <h2>What keeps me going</h2>
+    <div class="interests-grid">
+
+      <div class="interest-card">
+        <img class="interest-photo" src="images/padel.jpg" alt="Padel" />
+        <div class="interest-body">
+          <h3>Court time</h3>
+          <p>I'm in it for the fun and competition. I think it's highly addictive once you get into it.</p>
+        </div>
+      </div>
+
+      <div class="interest-card">
+        <img class="interest-photo" src="images/fire.jpg" alt="Fire flow arts" />
+        <div class="interest-body">
+          <h3>Playing with fire</h3>
+          <p>Fire flow arts is about as far from my day job as it gets, which is exactly why I love it. It's also how I've met some of the coolest people I know.</p>
+        </div>
+      </div>
+
+      <div class="interest-card">
+        <img class="interest-photo" src="images/hiking.jpg" alt="Hiking" />
+        <div class="interest-body">
+          <h3>Into the woods</h3>
+          <p>I'm on a hiking journey to become the real "Fjällfarsan".</p>
+        </div>
+      </div>
+
+      <div class="interest-card">
+        <img class="interest-photo" src="images/technology.jpg" alt="Technology" />
+        <div class="interest-body">
+          <h3>Always tinkering</h3>
+          <p>I like to dabble with tech to stay up to date. I try my best to not copy a line of code that I don't understand, but you gotta do what you gotta do sometimes.</p>
+        </div>
+      </div>
+
+      <div class="interest-card">
+        <img class="interest-photo" src="images/food.jpg" alt="Cooking" />
+        <div class="interest-body">
+          <h3>Food is love</h3>
+          <p>Some people eat to live, but I live to eat. Cooking is <em>really</em> important to me.</p>
+        </div>
+      </div>
+
+      <div class="interest-card">
+        <img class="interest-photo" src="images/travel.jpg" alt="Travel" />
+        <div class="interest-body">
+          <h3>Restless by nature</h3>
+          <p>Seeing how differently people live is the fastest cure for assumptions. I try to travel as much as life allows, and it never stops surprising me.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- BLOG -->
+  <section id="blog">
+    <p class="section-label">Writing</p>
+    <h2>Things I think about</h2>
+
+    <!--
+      HOW TO ADD A POST: Delete the blog-empty block below, then uncomment and use
+      the blog-list block. Copy an <li class="blog-item"> for each new post.
+
+    <ul class="blog-list">
+      <li class="blog-item">
+        <p class="blog-item-date">April 2026</p>
+        <p class="blog-item-title"><a href="#">Your post title here</a></p>
+        <p class="blog-item-excerpt">A sentence or two about what the post covers.</p>
+      </li>
+    </ul>
+    -->
+
+    <div class="blog-empty">
+      <div class="blog-empty-icon">&#9998;</div>
+      <p>Nothing published yet. Posts coming soon.</p>
+    </div>
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="contact-line">Let's have a real conversation.</p>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/omaraly1/" target="_blank">LinkedIn</a>
+      <a href="mailto:om@raly.se">Email</a>
+    </div>
+    <div class="footer-meta">
+      <p class="footer-copy">Omar Aly &middot; Stockholm, Sweden</p>
+      <p class="footer-ai-note">This site was designed and built with the help of AI (Claude by Anthropic).</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
